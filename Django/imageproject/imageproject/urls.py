@@ -9,4 +9,6 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^image/', include('image_app.urls')),
+    url(r'^post/', include('create_app.urls')),
+    url(r'^blog/', include('blog.urls')),
 	]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
