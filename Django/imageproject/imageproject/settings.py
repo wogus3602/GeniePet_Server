@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'create_app',
     'blog',
     'rest_framework.authtoken',
+    'reco',
 ]
 
 MIDDLEWARE = [
