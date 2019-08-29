@@ -8,8 +8,8 @@ from django.conf import settings
 from reco.urls import *
 urlpatterns = [
     path('admin/', admin.site.urls),
-    url(r'^image/', include('image_app.urls')),
-    url(r'^post/', include('create_app.urls')),
-    url(r'^blog/', include('blog.urls')),
+    path('image/', include('image_app.urls')),
+    path('post/', include('create_app.urls')),
+    path('blog/', include('blog.urls')),
     path('', include('reco.urls')),
 	]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
