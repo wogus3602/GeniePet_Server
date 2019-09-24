@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from .models import feed
-from .serializers import FeedSerializer
+from .models import feed,Dog,Rank
+from .serializers import FeedSerializer,DogSerializer,RankSerializer
 from rest_framework import viewsets
 from keras.models import load_model
 from PIL import Image
@@ -14,7 +14,12 @@ from django.views.decorators.csrf import csrf_exempt
 class FeedViewSet(viewsets.ModelViewSet):
     queryset = feed.objects.all()
     serializer_class = FeedSerializer
-
+class DogViewSet(viewsets.ModelViewSet):
+    queryset = Dog.objects.all()
+    serializer_class = DogSerializer
+class RankViewSet(viewsets.ModelViewSet):
+    queryset = Rank.objects.all()
+    serializer_class = RankSerializer
 
 model = load_model('model.h5')
 graph = tf.get_default_graph()
