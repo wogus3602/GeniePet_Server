@@ -7,14 +7,14 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'imageproject.settings')
 import django
 django.setup()
 
-from reco.models import Review,feed
+from reco.models import Review,Feed
 
 
 def save_review_from_row(review_row):
     review = Review()
     review.id = review_row[0]
     review.user_name = review_row[1]
-    review.wine = feed.objects.get(id=review_row[2])
+    review.feed = Feed.objects.get(id=review_row[2])
     review.rating = review_row[3]
     review.pub_date = datetime.datetime.now()
     review.comment = review_row[4]

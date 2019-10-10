@@ -16,9 +16,9 @@ def save_user_from_row(user_row):
     user.save()
     
 if __name__ == "__main__":
-    if len(sys.argv) == 1:
-        print ("Reading from file " + str(sys.argv[0]))
-        users_df = pd.read_csv(sys.argv[0])
+    if len(sys.argv) == 2:
+        print ("Reading from file " + str(sys.argv[1]))
+        users_df = pd.read_csv(sys.argv[1])
         print (users_df)
 
         users_df.apply(

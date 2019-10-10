@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import feed,Dog,Review
+from .models import Feed,Dog,Review
 from .serializers import FeedSerializer,DogSerializer,ReviewSerializer
 from rest_framework import viewsets
 from keras.models import load_model
@@ -12,7 +12,7 @@ from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 
 class FeedViewSet(viewsets.ModelViewSet):
-    queryset = feed.objects.all()
+    queryset = Feed.objects.all()
     serializer_class = FeedSerializer
 class DogViewSet(viewsets.ModelViewSet):
     queryset = Dog.objects.all()

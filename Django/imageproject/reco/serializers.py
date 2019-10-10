@@ -1,10 +1,10 @@
-from .models import feed,Dog,Review
+from .models import Feed,Dog,Review
 from rest_framework import serializers
 
 class FeedSerializer(serializers.ModelSerializer):
     class Meta:
-        model = feed
-        fields = ['id','name', 'price']
+        model = Feed
+        fields = ['id','name', 'price','text','image']
 
 
 
