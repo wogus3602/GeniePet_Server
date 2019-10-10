@@ -1,4 +1,4 @@
-from .models import feed,Dog,Rank
+from .models import feed,Dog,Review
 from rest_framework import serializers
 
 class FeedSerializer(serializers.ModelSerializer):
@@ -13,7 +13,7 @@ class DogSerializer(serializers.ModelSerializer):
         model = Dog
         fields = ['name', 'age','species']
 
-class RankSerializer(serializers.ModelSerializer):
+class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Rank
-        fields = ['date','dog', 'value']
+        model = Review
+        fields = ['feed', 'pub_date', 'user_name', 'comment' ,'rating']

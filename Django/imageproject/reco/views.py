@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from .models import feed,Dog,Rank
-from .serializers import FeedSerializer,DogSerializer,RankSerializer
+from .models import feed,Dog,Review
+from .serializers import FeedSerializer,DogSerializer,ReviewSerializer
 from rest_framework import viewsets
 from keras.models import load_model
 from PIL import Image
@@ -17,9 +17,9 @@ class FeedViewSet(viewsets.ModelViewSet):
 class DogViewSet(viewsets.ModelViewSet):
     queryset = Dog.objects.all()
     serializer_class = DogSerializer
-class RankViewSet(viewsets.ModelViewSet):
-    queryset = Rank.objects.all()
-    serializer_class = RankSerializer
+class ReviewViewSet(viewsets.ModelViewSet):
+    queryset = Review.objects.all()
+    serializer_class = ReviewSerializer
 
 model = load_model('model.h5')
 graph = tf.get_default_graph()

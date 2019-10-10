@@ -1,10 +1,17 @@
 from django.db import models
-
+import numpy as np
 # Create your models here.
 class feed(models.Model):
     name = models.CharField(max_length=100)
     price = models.CharField(max_length=30)
-    
+    def average_rating(self):
+        all_ratings = map(lambda x: x.rating, self.review_set.all())
+        return np.mean(all_ratings)
+        
+    def __unicode__(self):
+        return self.name
+    def __str__(self):
+        return self.name
 
 
 class Dog(models.Model):
@@ -15,11 +22,17 @@ class Dog(models.Model):
     def __str__(self):
         return self.name+': '+self.species
  
-class Rank(models.Model):
+class Review(models.Model):
 
-    class Meta(object):
-        unique_together = (("date", "dog"), )
-
-    date = models.DateField(db_index=True)
-    dog = models.ForeignKey(Dog, on_delete=models.CASCADE)
-    value = models.IntegerField()
+    RATING_CHOICES = (
+        (1, '1'),
+        (2, '2'),
+        (3, '3'),
+        (4, '4'),
+        (5, '5'),
+    )
+    feed = models.ForeignKey(feed,on_delete=models.CASCADE, related_name="review")
+    pub_date = models.DateTimeField('date published')
+    user_name = models.CharField(max_length=100)
+    comment = models.CharField(max_length=200)
+    rating = models.IntegerField(choices=RATING_CHOICES)
