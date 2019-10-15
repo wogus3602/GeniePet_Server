@@ -9,15 +9,19 @@ import tensorflow as tf
 from django.http import HttpResponse, JsonResponse
 import json
 from django.views.decorators.csrf import csrf_exempt
+from rest_framework import permissions
 # Create your views here.
 
 class FeedViewSet(viewsets.ModelViewSet):
+    permission_classes = (permissions.AllowAny,)
     queryset = Feed.objects.all()
     serializer_class = FeedSerializer
 class DogViewSet(viewsets.ModelViewSet):
+    permission_classes = (permissions.IsAuthenticated,)
     queryset = Dog.objects.all()
     serializer_class = DogSerializer
 class ReviewViewSet(viewsets.ModelViewSet):
+    permission_classes = (permissions.IsAuthenticated,)
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
 

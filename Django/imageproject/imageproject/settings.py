@@ -39,17 +39,31 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
     'rest_framework',
     'image_app',
     'create_app',
     'blog',
     'rest_framework.authtoken',
+    'rest_auth',
+    'rest_auth.registration',
     'reco',
 ]
+SITE_ID = 1
+REST_USE_JWT = True
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-    'PAGE_SIZE': 10
+    'PAGE_SIZE': 10,
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+    ),
 }
+APPEND_SLASH=False
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -80,7 +94,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'imageproject.wsgi.application'
 
-
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = None
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 

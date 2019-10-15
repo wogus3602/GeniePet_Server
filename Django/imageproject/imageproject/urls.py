@@ -11,5 +11,7 @@ urlpatterns = [
     path('image/', include('image_app.urls')),
     path('post/', include('create_app.urls')),
     path('blog/', include('blog.urls')),
+    path('auth/',include('rest_auth.urls')),
+    path('auth/regiter/',include('rest_auth.registration.urls')),
     path('', include('reco.urls')),
 	]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
