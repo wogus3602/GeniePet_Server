@@ -1,4 +1,4 @@
-from .models import Feed,Dog,Review
+from .models import *
 from rest_framework import serializers
 
 class FeedSerializer(serializers.ModelSerializer):
@@ -17,3 +17,13 @@ class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
         fields = ['feed', 'pub_date', 'user_name', 'comment' ,'rating']
+
+class CartSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Cart
+        fields = ( 'url', 'items',)
+
+class OrderSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Order
+        fields = ( 'url', 'items','cart')

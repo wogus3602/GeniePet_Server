@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from .models import Feed,Dog,Review
-from .serializers import FeedSerializer,DogSerializer,ReviewSerializer
+from .models import Feed,Dog,Review,Cart,Order
+from .serializers import FeedSerializer,DogSerializer,ReviewSerializer,CartSerializer,OrderSerializer
 from rest_framework import viewsets
 from keras.models import load_model
 from PIL import Image
@@ -25,25 +25,15 @@ class ReviewViewSet(viewsets.ModelViewSet):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
 
-model = load_model('model.h5')
-graph = tf.get_default_graph()
 
+class CartViewSet(viewsets.ModelViewSet):
+    queryset = Cart.objects.all()
+    serializer_class = CartSerializer
+
+class OrderViewSet(viewsets.ModelViewSet):
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
 @csrf_exempt
 def post(request):
-    global graph
-    with graph.as_default():
-        test_image = request.FILES['model_pic']
-        img = Image.open(test_image)
-        img = img.convert("RGB")
-        img = img.resize((224,224))
-        data = np.asarray(img)
-        X = np.array(data)
-        X = X.astype("float") / 256
-        X = X.reshape(-1, 224, 224,3)
-        
-        categories = ['GermanShepherd', 'GoldenRetriever', 'SiberianHusky']
-        pred = model.predict(X)
-        print(pred)
-        result = [np.argmax(value) for value in pred]  
-        print('New data category : ',categories[result[0]])
-        return HttpResponse(categories[result[0]])
+    print(request.body)
+    return JsonResponse('hi')

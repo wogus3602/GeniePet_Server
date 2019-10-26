@@ -8,6 +8,8 @@ router = DefaultRouter()
 router.register('feed', views.FeedViewSet)
 router.register('dog', views.DogViewSet)
 router.register('review', views.ReviewViewSet)
+router.register('cart', views.CartViewSet)
+router.register('order', views.OrderViewSet)
 urlpatterns = [
     path('', include(router.urls)),
     path('pot/upload/',views.post),
