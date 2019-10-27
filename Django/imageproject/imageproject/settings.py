@@ -40,16 +40,16 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-    'allauth',
-    'allauth.account',
-    'rest_framework',
     'image_app',
     'create_app',
     'blog',
+    'reco',
     'rest_framework.authtoken',
     'rest_auth',
     'rest_auth.registration',
-    'reco',
+    'allauth',
+    'allauth.account',
+    'rest_framework',
 ]
 SITE_ID = 1
 REST_USE_JWT = True
@@ -102,9 +102,6 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
-
-
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
 

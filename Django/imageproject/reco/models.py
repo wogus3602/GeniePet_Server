@@ -45,7 +45,7 @@ class Review(models.Model):
 class Cart(models.Model):
     objects = models.Manager()
     status = models.CharField(max_length=255, blank=True, null=True)
-    user = models.ForeignKey(User,default='admin',on_delete=models.CASCADE, related_name="carts")
+    user = models.ForeignKey(User,null=True,on_delete=models.CASCADE, related_name="carts")
     items = models.ManyToManyField(Feed)    
 
 
@@ -53,4 +53,4 @@ class Order(models.Model):
     objects = models.Manager()
     cart = models.ForeignKey(Cart,on_delete=models.CASCADE, blank=True, null=True)
     items = models.ManyToManyField(Feed) 
-    user = models.ForeignKey(User,default='admin',on_delete=models.CASCADE, related_name="orders")
+    user = models.ForeignKey(User,null=True,on_delete=models.CASCADE, related_name="orders")
