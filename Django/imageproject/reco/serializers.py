@@ -6,8 +6,6 @@ class FeedSerializer(serializers.ModelSerializer):
         model = Feed
         fields = ['id','name', 'price','text','image']
 
-
-
 class DogSerializer(serializers.ModelSerializer):
     class Meta:
         model = Dog
