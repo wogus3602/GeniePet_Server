@@ -5,6 +5,7 @@ from django.http import HttpResponse, JsonResponse, HttpRequest, HttpResponseRed
 from .models import payInfo
 import requests
 import json
+from django.core import serializers
 
 @api_view(['POST'])
 def kakaoPay(request):
@@ -32,13 +33,13 @@ def kakaoPay(request):
     TID = response['tid']
     return HttpResponseRedirect(response["next_redirect_pc_url"])
 
-@api_view(['GET'])
-def success(requests):
-    pg = requests.GET['pg_token']
-    #return payapporve(pg)
+def success(request):
+    global pg
+    pg = request.GET['pg_token']
+    info = payapporve(pg)
+    return Response('success.html')
 
-@api_view(['POST'])
-def payapporve(pgtoken):
+def payapporve(pg):
     url = "https://kapi.kakao.com"
     headers = {
         'Authorization': "KakaoAK " + "b015e63a2c205f0cdad176489f142a37",
@@ -49,12 +50,11 @@ def payapporve(pgtoken):
         'tid' : TID,
         'partner_order_id': "1001",
         'partner_user_id' : 'GeniePet',
-        'pg_token' : pgtoken,
+        'pg_token' : pg,
     }
     response = requests.post(url+"/v1/payment/approve", params=params, headers=headers)
     response = json.loads(response.text)
-    print(response)
-    return Response(response)
+    return response
 
 
 def pay(requests):
